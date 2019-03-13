@@ -1,0 +1,15 @@
+main: jdz.blockGlitch.BlockGlitchHistory
+name: BlockGlitchHistory
+version: 1.0
+author: Jonodonozym
+description: 
+depend: [JBU]
+
+
+commands:
+  blockGlitch:
+    aliases: [bg]
+      
+permissions:
+  blockGlitch.admin:
+    default: false
