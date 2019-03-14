@@ -5,12 +5,14 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.plugin.Plugin;
 
 import jdz.blockGlitch.search.RegionSelector.Region;
 import jdz.bukkitUtils.sql.SQLRow;
 import jdz.bukkitUtils.sql.SqlDatabase;
+import jdz.bukkitUtils.sql.ORM.SQLDataClass;
 import lombok.Getter;
 
 public class GlitchDatabase extends SqlDatabase {
@@ -21,6 +23,13 @@ public class GlitchDatabase extends SqlDatabase {
 		super(plugin);
 		this.plugin = plugin;
 		instance = this;
+
+		SQLDataClass.addParserSerialiser(Material.class, (string) -> {
+			return Material.valueOf(string);
+		}, (material) -> {
+			return material.name();
+		});
+
 		runOnConnect(() -> {
 			GlitchData.createTable(GlitchData.class, this);
 			GlitchData.createIndex(GlitchData.class, "x", this);
