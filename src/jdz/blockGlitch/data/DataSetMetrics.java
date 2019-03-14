@@ -67,7 +67,7 @@ public class DataSetMetrics {
 			VectorMetrics metrics = metricsSet.get(vector);
 			String message = ChatColor.LIGHT_PURPLE
 					+ String.format("(%d,%d,%d)", vector.getBlockX(), vector.getBlockY(), vector.getBlockZ());
-			message += String.format(" broken &d times between %s and %s, last break by %s", metrics.frequency,
+			message += String.format(" broken %d times between %s and %s, last break by %s", metrics.frequency,
 					GlitchData.getTimeString(metrics.earliestModification),
 					GlitchData.getTimeString(metrics.latestModification), metrics.latestModifiedPlayer.getName());
 			player.sendMessage(message);

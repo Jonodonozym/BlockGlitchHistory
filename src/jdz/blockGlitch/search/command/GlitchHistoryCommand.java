@@ -40,7 +40,5 @@ public class GlitchHistoryCommand extends SubCommand {
 					data.getY(), data.getZ());
 			sender.sendMessage(message);
 		}
-		DataSetMetrics metrics = new DataSetMetrics(history);
-		metrics.outputResults(sender);
 	}
 }
