@@ -30,7 +30,7 @@ public class GlitchHistoryCommand extends SubCommand {
 
 		List<GlitchData> history = GlitchDatabase.getInside(region);
 		sender.sendMessage(LIGHT_PURPLE + "" + history.size() + " entries found");
-		sender.sendMessage(LIGHT_PURPLE + "Server time is: " + new Date().toString());
+		sender.sendMessage(LIGHT_PURPLE + "Server time is: " + GlitchData.getTimeString(System.currentTimeMillis()));
 		history.sort((a, b) -> {
 			return Long.compare(a.getTime(), b.getTime());
 		});
