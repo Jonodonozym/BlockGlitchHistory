@@ -15,9 +15,11 @@ import lombok.Getter;
 
 public class GlitchDatabase extends SqlDatabase {
 	@Getter private static GlitchDatabase instance;
+	private final Plugin plugin;
 
 	public GlitchDatabase(Plugin plugin) {
 		super(plugin);
+		this.plugin = plugin;
 		instance = this;
 		runOnConnect(() -> {
 			GlitchData.createTable(GlitchData.class, this);
@@ -48,7 +50,7 @@ public class GlitchDatabase extends SqlDatabase {
 	}
 
 	public static void addAsync(GlitchData data) {
-		Bukkit.getScheduler().runTaskAsynchronously(instance.getPlugin(), () -> {
+		Bukkit.getScheduler().runTaskAsynchronously(instance.plugin, () -> {
 			data.insert(instance);
 		});
 	}

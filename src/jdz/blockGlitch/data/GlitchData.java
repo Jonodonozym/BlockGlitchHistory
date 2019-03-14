@@ -16,12 +16,13 @@ import jdz.bukkitUtils.sql.ORM.SQLDataClass;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
 
 @Data
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = false)
 public class GlitchData extends SQLDataClass {
-	@NoSave private static final DateFormat format = new SimpleDateFormat("mon dd hh:mm:ss");
+	@NoSave @Getter private static final DateFormat dateFormat = new SimpleDateFormat("MM-dd hh:mm:ss");
 	
 	private final OfflinePlayer player;
 	private final long time;
@@ -42,6 +43,6 @@ public class GlitchData extends SQLDataClass {
 	}
 	
 	public static String getTimeString(long time) {
-		return format.format(new Date(time));
+		return dateFormat.format(new Date(time));
 	}
 }
