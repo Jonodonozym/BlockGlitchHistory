@@ -18,9 +18,12 @@ import org.bukkit.inventory.ItemStack;
 import jdz.bukkitUtils.events.Listener;
 import jdz.bukkitUtils.misc.WorldUtils;
 import jdz.bukkitUtils.misc.utils.ItemUtils;
+import lombok.AccessLevel;
 import lombok.Data;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class RegionSelector implements Listener {
 	@Data
 	public static class Region {
@@ -39,7 +42,7 @@ public class RegionSelector implements Listener {
 	private final ItemStack regionWand = createRegionWand();
 
 	public Region getSelectedRegion(Player player) {
-		if (!locationA.containsKey(player) || !locationB.containsKey(player))
+		if (!(locationA.containsKey(player) && locationB.containsKey(player)))
 			return null;
 		return new Region(locationA.get(player), locationB.get(player));
 	}
@@ -60,7 +63,9 @@ public class RegionSelector implements Listener {
 		if (!isHoldingWand(event.getPlayer()))
 			return;
 
-		Block target = event.getPlayer().getTargetBlock((HashSet<Byte>) null, 100);
+		Block target = event.getClickedBlock();
+		if (target == null)
+			target = event.getPlayer().getTargetBlock((HashSet<Byte>) null, 100);
 		if (target == null)
 			return;
 
